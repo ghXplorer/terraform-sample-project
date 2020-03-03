@@ -6,4 +6,4 @@ wget https://busybox.net/downloads/binaries/1.28.1-defconfig-multiarch/busybox-x
 mv busybox-x86_64 busybox
 chmod +x busybox
 echo "Hello, World from $(hostname)" > index.html
-nohup ./busybox httpd -f -p ${var.server_port} &
+nohup ./busybox httpd -f -p ${server_port} &
