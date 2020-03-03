@@ -168,3 +168,16 @@ resource "aws_lb_listener_rule" "asg" {
     target_group_arn = aws_lb_target_group.asg.arn
   }
 }
+
+terraform {
+  backend "s3" {
+    # Replace this with your bucket name!
+    bucket         = "terraform-sample-project-02032020"
+    key            = "stage/services/frontend-app/terraform.tfstate"
+    region         = "eu-central-1"
+
+    # Replace this with your DynamoDB table name!
+    dynamodb_table = "terraform-sample-project-locks"
+    encrypt        = true
+  }
+}
