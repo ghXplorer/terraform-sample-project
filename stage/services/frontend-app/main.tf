@@ -37,6 +37,8 @@ data "template_file" "user_data" {
 
   vars = {
     server_port = var.server_port
+    db_address  = data.terraform_remote_state.db.outputs.address
+    db_port     = data.terraform_remote_state.db.outputs.port
   }
 }
 
@@ -169,6 +171,7 @@ resource "aws_lb_listener_rule" "asg" {
   }
 }
 
+
 terraform {
   backend "s3" {
     # Replace this with your bucket name!
@@ -179,5 +182,16 @@ terraform {
     # Replace this with your DynamoDB table name!
     dynamodb_table = "terraform-sample-project-locks"
     encrypt        = true
+  }
+}
+
+
+data "terraform_remote_state" "db" {
+  backend = "s3"
+
+  config = {
+    bucket = "terraform-sample-project-02032020"
+    key    = "stage/data-storage/mysql/terraform.tfstate"
+    region = "eu-central-1"
   }
 }
