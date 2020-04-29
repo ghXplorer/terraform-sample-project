@@ -6,12 +6,10 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    # Replace this with your bucket name!
     bucket         = "terraform-sample-project-02032020"
     key            = "stage/data-storage/mysql/terraform.tfstate"
     region         = "eu-central-1"
 
-    # Replace this with your DynamoDB table name!
     dynamodb_table = "terraform-sample-project-locks"
     encrypt        = true
   }
