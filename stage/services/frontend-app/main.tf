@@ -187,8 +187,10 @@ terraform {
 
 
 data "terraform_remote_state" "db" {
+  # data source to fetch/read the Terraform state file stored by another
+  # set of Terraform configurations in another S3 bucket
   backend = "s3"
-
+ 
   config = {
     bucket = "terraform-sample-project-02032020"
     key    = "stage/data-storage/mysql/terraform.tfstate"
